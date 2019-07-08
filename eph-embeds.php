@@ -31,9 +31,7 @@ function handle_deviantart( $matches, $attr, $url, $rawattr ) {
 
 	$da_response = \wp_remote_get( 'https://backend.deviantart.com/oembed?url=' . rawurlencode( $url ), $http_options );
 	if ( empty( $da_response ) || 200 !== $da_response['response']['code'] ) {
-		unset( $da_response['body'] );
-		unset( $da_response['http_response'] );
-		return "<p><!-- Could not embed: {$da_response['response']['code']} --><a href=\"{$url}\">View Deviation</a></p>";
+		return "<p><!-- Could not embed --><a href=\"{$url}\">View Deviation</a></p>";
 	}
 
 	$deviation = json_decode( $da_response['body'] );
